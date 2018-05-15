@@ -7,11 +7,11 @@ As far as we use relational databases we have to consider key fields which act
 as identifiers of the table. Other than usual primary keys, composite key plays
 specific role since multiple candidates collectively generate Id.
 
-In JPA (Java Persistence API) there’s two ways to specify entity composite
+In JPA (Java Persistence API) there's two ways to specify entity composite
 keys:`@IdClass` and `@EmbeddedId`
 
 Among those this blog basically explain how we handle composite key relationship
-in Java spring boot application using @Idclass annotation. First let’s begin
+in Java spring boot application using @Idclass annotation. First let's begin
 after cloning my git hub repository.
 [https://github.com/bhagyaj/composite-idclass](https://github.com/bhagyaj/composite-idclass)
 
@@ -21,7 +21,7 @@ Department.
 ![](https://cdn-images-1.medium.com/max/1600/1*cbhwPB6b__kElasmzvYcug.png)
 <span class="figcaption_hack">Department-Employee</span>
 
-Now I’m gonna explain how this relationship with composite keys implement in
+Now I'm gonna explain how this relationship with composite keys implement in
 Spring boot application written in Java. First we have to create Employee and
 Department model classes separately. And two separate classes for Composite
 keys. To be clear Employee entity will be used as the example.
@@ -59,10 +59,10 @@ part of composite key.
 
 @ManyToOne shows department entity has multiple employees and the fields that
 used to join those(Fields available in both entities). Insertable and updatable
-false because it’s not a responsibility of an employee to create and update
+false because it's not a responsibility of an employee to create and update
 Department.
 
-Let’s see how id class looks like with composite key. As below it only has key
+Let's see how id class looks like with composite key. As below it only has key
 fields without any annotation.
 
 ```java
@@ -80,11 +80,11 @@ name we can use below query.
 
     select e.name from Employee e
 
-It’s directly accessing Id fields without accessing idclass. Meantime we can use
-this method to apply for legacy systems since we don’t have to change existing
+It's directly accessing Id fields without accessing idclass. Meantime we can use
+this method to apply for legacy systems since we don't have to change existing
 model class.
 
-Let’s see how mapping look likes in the department end(One department for
+Let's see how mapping look likes in the department end(One department for
 multiple employees).
 
 ```java
@@ -111,7 +111,7 @@ we load everything at once(EAGER) or we load on the fly (LAZY). mappedBy
 introduce the object of the Department class available in mapped class Employee.
 Employees belong to that department will fetch to the declared set.
 
-I’ll conclude my blog by presenting final output when I request department by
+I'll conclude my blog by presenting final output when I request department by
 its composite Id and Employee By its composite Id.
 
 **Request: Department by Id**
